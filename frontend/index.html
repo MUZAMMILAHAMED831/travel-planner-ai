@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✈️ Muzammil's Travel Planner AI</h1>
+            <p>Plan your perfect trip with AI assistance</p>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <h2>Plan Your Journey</h2>
+                <form id="travelForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="source">📍From</label>
+                            <input 
+                                type="text" 
+                                id="source" 
+                                placeholder="e.g., New York" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination">🗺️ Destination</label>
+                            <input 
+                                type="text" 
+                                id="destination" 
+                                placeholder="e.g., Paris" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dates">📅 Travel Dates</label>
+                            <input 
+                                type="text" 
+                                id="dates" 
+                                placeholder="e.g., Nov 25 - Nov 30, 2025" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="travelers">👥 Number of Travelers</label>
+                            <input 
+                                type="number" 
+                                id="travelers" 
+                                placeholder="e.g., 2" 
+                                min="1" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="interests">❤️ Interests (comma-separated)</label>
+                            <input 
+                                type="text" 
+                                id="interests" 
+                                placeholder="e.g., museums, hiking, local cuisine, history" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Generate My Itinerary</button>
+                </form>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>Your Travel Plan</h2>
+                    <button id="exportPdfBtn" class="export-btn" style="display: none;">📥 Download PDF</button>
+                </div>
+                <div id="loadingSpinner" class="spinner" style="display: none;">
+                    <div class="spinner-inner"></div>
+                    <p>Creating your personalized itinerary...</p>
+                </div>
+                <div id="itineraryContent" class="itinerary-content"></div>
+            </section>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Travel Planner AI. Powered by Muzammil Ahamed</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
