@@ -1,4 +1,7 @@
-const API_URL = 'http://127.0.0.1:5000/api';
+// Use your Render URL here after deployment (e.g., 'https://travel-planner-backend.onrender.com/api')
+const API_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' 
+    ? 'http://127.0.0.1:5000/api' 
+    : '/api'; // This assumes you might host them together, or we'll update it later
 
 const travelForm = document.getElementById('travelForm');
 const resultsSection = document.getElementById('resultsSection');
