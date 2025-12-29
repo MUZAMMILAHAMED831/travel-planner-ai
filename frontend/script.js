@@ -1,7 +1,9 @@
-// Use your Render URL here after deployment (e.g., 'https://travel-planner-backend.onrender.com/api')
-const API_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' 
-    ? 'http://127.0.0.1:5000/api' 
-    : '/api'; // This assumes you might host them together, or we'll update it later
+// Detect if we are running locally or on the cloud
+const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
+    ? 'http://127.0.0.1:5000/api'
+    : window.location.origin + '/api';
+
+console.log('Using API URL:', API_URL);
 
 const travelForm = document.getElementById('travelForm');
 const resultsSection = document.getElementById('resultsSection');
@@ -93,8 +95,9 @@ async function generateItinerary(formData) {
         }
     } catch (error) {
         loadingSpinner.style.display = 'none';
-        showError(`Error: ${error.message}. Make sure the backend is running on http://127.0.0.1:5000`);
+        showError(`Error: ${error.message}. Please check if GEMINI_API_KEY is set in Railway Variables.`);
         resultsSection.style.display = 'none';
+        console.error('Generation error:', error);
     } finally {
         submitBtn.disabled = false;
     }
