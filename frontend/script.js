@@ -1,4 +1,4 @@
-// Detect if we are running locally or on the cloud
+// Use dynamic URL detection for local vs production
 const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
     ? 'http://127.0.0.1:5000/api'
     : window.location.origin + '/api';
@@ -79,7 +79,8 @@ async function generateItinerary(formData) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -165,6 +166,6 @@ async function checkBackendHealth() {
             console.warn('Backend health check failed');
         }
     } catch (error) {
-        console.warn('Backend is not running on http://127.0.0.1:5000', error);
+        console.warn('Backend connection failed', error);
     }
 }
