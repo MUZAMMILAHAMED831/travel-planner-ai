@@ -24,18 +24,20 @@ def index():
 
 API_KEY = os.getenv('GEMINI_API_KEY')
 if not API_KEY:
-    print("ERROR: GEMINI_API_KEY not found in .env file!", file=sys.stderr)
+    print("ERROR: GEMINI_API_KEY not found in environment variables!", file=sys.stderr)
 else:
     print(f"API Key loaded: {API_KEY[:10]}..." if len(API_KEY) > 10 else "API Key loaded")
-    
-genai.configure(api_key=API_KEY)
+    genai.configure(api_key=API_KEY)
 
 try:
-    models = genai.list_models()
-    print("Available models:")
-    for model in models:
-        if 'generateContent' in model.supported_generation_methods:
-            print(f"  - {model.name}")
+    if API_KEY:
+        models = genai.list_models()
+        print("Available models:")
+        for model in models:
+            if 'generateContent' in model.supported_generation_methods:
+                print(f"  - {model.name}")
+    else:
+        print("Skipping model listing: GEMINI_API_KEY is missing.")
 except Exception as e:
     print(f"Could not list models: {e}", file=sys.stderr)
 
@@ -59,7 +61,7 @@ Please provide a comprehensive travel plan that includes:
 
 Format the response in a clear, organized manner with sections and bullet points where appropriate."""
 
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     response = model.generate_content(prompt)
     
     return response.text

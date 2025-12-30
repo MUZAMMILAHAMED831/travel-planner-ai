@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath backend app:app
+web: gunicorn --pythonpath backend --timeout 120 app:app
